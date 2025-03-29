@@ -9,12 +9,12 @@ export const IconButtonContainer = styled.div`
     justify-content: center;
     gap: 0.5rem;
     padding: 0.5rem;
-    border-radius: 8px;
+    border-radius: 4px;
     border: none;
     color: ${(props) => props.theme["gray-300"]};
     background: ${(props) => props.theme["gray-800"]};
-    cursor: pointer;
 
+    cursor: pointer;
     transition: background 0.2s;
 
     &:hover {

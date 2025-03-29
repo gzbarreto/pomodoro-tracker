@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.div`
-display: flex;
-align-items:center;
-justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
 
 export const PageTitle = styled.div`
@@ -18,4 +18,11 @@ export const PageTitle = styled.div`
   }
 `
 
-export const HeaderButtons = styled.div``
+export const HeaderButtons = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  a {
+    text-decoration: none;
+  }
+`
