@@ -1,5 +1,7 @@
+import { NavLink } from "react-router-dom"
 import { HeaderButtons, HeaderContainer, PageTitle } from "./styles"
-
+import { SunDim, ClockCounterClockwise } from "@phosphor-icons/react"
+import { IconButton } from "../IconButton"
 export function Header() {
   return (
     <HeaderContainer>
@@ -9,8 +11,13 @@ export function Header() {
       </PageTitle>
 
       <HeaderButtons>
-        <button>historico</button>
-        <button>tema</button>
+        <NavLink to="/history" title="Histórico">
+          <IconButton
+            icon={<ClockCounterClockwise size={24} />}
+            label={"Histórico"}
+          />
+        </NavLink>
+        <IconButton icon={<SunDim size={24} />}/>
       </HeaderButtons>
     </HeaderContainer>
   )
