@@ -9,6 +9,7 @@ import {
   SessionTitle,
 } from "./styles"
 import { NavLink } from "react-router-dom"
+import { ModeBadge } from "../../../components/ModeBadge"
 
 export function SessionDetails() {
   return (
@@ -29,7 +30,7 @@ export function SessionDetails() {
             <h4>Modo atual:</h4>
             <p>Ciclo atual do cronômetro</p>
           </div>
-          <span>Pausa longa</span>
+          <ModeBadge mode={'longBreak'}/>
         </ModeInfo>
 
         <ModeInfo>
@@ -37,7 +38,7 @@ export function SessionDetails() {
             <h4>Próximo modo:</h4>
             <p>Ciclo que será ativado ao final do cronômetro</p>
           </div>
-          <span>Foco</span>
+          <ModeBadge mode={'focus'}/>
         </ModeInfo>
       </SessionInfoContainer>
 
