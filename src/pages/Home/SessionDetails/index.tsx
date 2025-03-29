@@ -1,6 +1,7 @@
 import { Gear } from "@phosphor-icons/react"
 import { IconButton } from "../../../components/IconButton"
 import {
+  ModeInfo,
   SessionCountdownContainer,
   SessionDetailsContainer,
   SessionHeader,
@@ -23,15 +24,21 @@ export function SessionDetails() {
       </SessionHeader>
 
       <SessionInfoContainer>
-        <div>
-          <h4>Modo atual:</h4>
-          <p>Ciclo atual do cronômetro</p>
-        </div>
+        <ModeInfo>
+          <div>
+            <h4>Modo atual:</h4>
+            <p>Ciclo atual do cronômetro</p>
+          </div>
+          <span>Pausa longa</span>
+        </ModeInfo>
 
-        <div>
-          <h4>Próximo modo:</h4>
-          <p>Ciclo que será ativado ao final do cronômetro</p>
-        </div>
+        <ModeInfo>
+          <div>
+            <h4>Próximo modo:</h4>
+            <p>Ciclo que será ativado ao final do cronômetro</p>
+          </div>
+          <span>Foco</span>
+        </ModeInfo>
       </SessionInfoContainer>
 
       <SessionCountdownContainer>

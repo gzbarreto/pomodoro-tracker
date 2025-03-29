@@ -36,12 +36,32 @@ gap: 0.25rem;
 
 // Session info styling
 export const SessionInfoContainer = styled.div`
-display: flex;
-flex-direction: column;
-gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 `
 
+export const ModeInfo = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
 
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: ${(props) => props.theme["gray-500"]};
+  }
+`
 
 // Session countdown styling
 export const SessionCountdownContainer = styled.div``
