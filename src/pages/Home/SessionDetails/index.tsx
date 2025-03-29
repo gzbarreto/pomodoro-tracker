@@ -10,13 +10,14 @@ import {
 } from "./styles"
 import { NavLink } from "react-router-dom"
 import { ModeBadge } from "../../../components/ModeBadge"
+import { Button } from "../../../components/Button"
 
 export function SessionDetails() {
   return (
     <SessionDetailsContainer>
       <SessionHeader>
         <SessionTitle>
-          <h2>Dados da sessão</h2>
+          <h3>Dados da sessão</h3>
           <p>Acompanhe os próximos ciclos</p>
         </SessionTitle>
         <NavLink to={"configuration"}>
@@ -27,7 +28,7 @@ export function SessionDetails() {
       <SessionInfoContainer>
         <ModeInfo>
           <div>
-            <h4>Modo atual:</h4>
+            <h4>Modo atual</h4>
             <p>Ciclo atual do cronômetro</p>
           </div>
           <ModeBadge mode={'longBreak'}/>
@@ -35,7 +36,7 @@ export function SessionDetails() {
 
         <ModeInfo>
           <div>
-            <h4>Próximo modo:</h4>
+            <h4>Próximo modo</h4>
             <p>Ciclo que será ativado ao final do cronômetro</p>
           </div>
           <ModeBadge mode={'focus'}/>
@@ -43,7 +44,13 @@ export function SessionDetails() {
       </SessionInfoContainer>
 
       <SessionCountdownContainer>
-        <p>Teste countdown</p>
+        <div>
+          <h2>Vamos começar!</h2>
+          <p>Bora para mais um ciclo</p>
+          <Button label="Iniciar"/>
+        </div>
+
+        <span>00:00</span>
       </SessionCountdownContainer>
     </SessionDetailsContainer>
   )
