@@ -1,7 +1,12 @@
+import { SessionDetails } from "./SessionDetails";
+import { HomeContainer } from "./styles";
+import { TodoList } from "./TodoList";
+
 export function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-    </div>
+    <HomeContainer>
+      <SessionDetails />
+      <TodoList />
+    </HomeContainer>
   )
 }
