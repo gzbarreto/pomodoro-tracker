@@ -11,6 +11,8 @@ export const SectionContainer = styled.section`
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
+  max-height: calc(100vh - 15rem);
+
 
   border: 2px solid ${(props) => props.theme["gray-800"]};
   border-radius: 12px;

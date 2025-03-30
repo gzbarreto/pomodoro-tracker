@@ -1,16 +1,18 @@
 import styled from "styled-components"
 
 export const ListContainer = styled.div`
-display: flex;
-flex: 1;
-flex-direction: column;
-justify-content: space-between;
-
-ul {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 1rem;
-}
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 28rem);
+  }
 `
 
 export const FormContainer = styled.form`
