@@ -1,19 +1,14 @@
 import { Gear } from "@phosphor-icons/react"
 import { IconButton } from "../../../components/IconButton"
-import {
-  ModeInfo,
-  SessionDetailsContainer,
-  SessionHeader,
-  SessionInfoContainer,
-  SessionTitle,
-} from "./styles"
+import { ModeInfo, SessionInfoContainer } from "./styles"
 import { NavLink } from "react-router-dom"
 import { ModeBadge } from "../../../components/ModeBadge"
 import { Countdown } from "./Countdown"
+import { SectionContainer, SessionHeader, SessionTitle } from "../styles"
 
 export function SessionDetails() {
   return (
-    <SessionDetailsContainer>
+    <SectionContainer>
       <SessionHeader>
         <SessionTitle>
           <h3>Dados da sessão</h3>
@@ -43,6 +38,6 @@ export function SessionDetails() {
       </SessionInfoContainer>
 
       <Countdown />
-    </SessionDetailsContainer>
+    </SectionContainer>
   )
 }
