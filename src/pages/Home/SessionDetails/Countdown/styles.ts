@@ -24,7 +24,7 @@ export const CountdownContainer = styled.div`
     color: ${(props) => props.theme["gray-400"]};
   }
   span {
-    font-family: "Roboto Mono", monospace;
-    font-size: 2.5rem;
+    font-family: "RajDhani", monospace;
+    font-size: 3rem;
   }
 `
