@@ -1,15 +1,33 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-export const List = styled.ul`
+export const ListContainer = styled.div`
 display: flex;
+flex: 1;
 flex-direction: column;
-gap: 0.5rem;
+justify-content: space-between;
 
-li {
+ul {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 1rem;
-  font-size: 1rem;
-  color: ${(props) => props.theme["gray-200"]};
 }
+`
+
+export const FormContainer = styled.form`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+`
+
+export const TaskInput = styled.input`
+  height: 2.5rem;
+  border-radius: 4px;
+  border: 2px solid ${(props) => props.theme["gray-700"]};
+  background: ${(props) => props.theme["gray-800"]};
+  color: ${(props) => props.theme["gray-200"]};
+  padding: 0.5rem;
+
+  &::placeholder {
+    color: ${(props) => props.theme["gray-600"]};
+  }
 `

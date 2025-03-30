@@ -1,12 +1,10 @@
-import { ButtonContainer } from "./styles";
+import { ButtonContainer } from "./styles"
 
 interface ButtonProps {
   label: string
+  type: "button" | "submit"
 }
-export function Button({label} : ButtonProps) {
-  return (
-    <ButtonContainer>
-      {label}
-    </ButtonContainer>
-  )
+
+export function Button({ label, type }: ButtonProps) {
+  return <ButtonContainer type={type}>{label}</ButtonContainer>
 }

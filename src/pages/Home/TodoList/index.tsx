@@ -1,6 +1,7 @@
-import { Checkbox } from "../../../components/Checkbox"
+import { Button } from "../../../components/Button"
 import { SectionContainer, SessionHeader, SessionTitle } from "../styles"
-import { List } from "./styles"
+import { ListItem } from "./ListItem"
+import { FormContainer, ListContainer, TaskInput } from "./styles"
 
 export function TodoList() {
   return (
@@ -12,16 +13,17 @@ export function TodoList() {
         </SessionTitle>
       </SessionHeader>
 
-      <List>
-        <li>
-          <Checkbox isChecked={false} onClick={() => {}} />
-          Item 1
-        </li>
-        <li>
-          <Checkbox isChecked={true} onClick={() => {}} />
-          Item 2
-        </li>
-      </List>
+      <ListContainer>
+        <ul>
+          <ListItem isDone={true} task={"Estudar React"} onClick={() => {}} />
+          <ListItem isDone={false} task={"Estudar Mobile"} onClick={() => {}} />
+        </ul>
+
+        <FormContainer>
+          <TaskInput placeholder="Nova tarefa" />
+          <Button label="Adicionar" type="submit" />
+        </FormContainer>
+      </ListContainer>
     </SectionContainer>
   )
 }

@@ -10,8 +10,13 @@ export const CheckboxContainer = styled.div`
   background: ${(props) => props.theme["gray-800"]};
   border: 2px solid ${(props) => props.theme["gray-700"]};
   padding: 0.25rem;
+  cursor: pointer;
 
   transition: all 0.2s;
+
+&:hover {
+    border: 2px solid ${(props) => props.theme["primary-500"]};
+  }
 `
 
 export const CheckboxChecked = styled(CheckboxContainer)`
