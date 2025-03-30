@@ -1,7 +1,4 @@
-import { Gear } from "@phosphor-icons/react"
-import { IconButton } from "../../../components/IconButton"
 import { ModeInfo, SessionInfoContainer } from "./styles"
-import { NavLink } from "react-router-dom"
 import { ModeBadge } from "../../../components/ModeBadge"
 import { Countdown } from "./Countdown"
 import { SectionContainer, SessionHeader, SessionTitle } from "../styles"
@@ -14,9 +11,6 @@ export function SessionDetails() {
           <h3>Dados da sessão</h3>
           <p>Acompanhe os próximos ciclos</p>
         </SessionTitle>
-        <NavLink to={"configuration"}>
-          <IconButton icon={<Gear size={24} />} />
-        </NavLink>
       </SessionHeader>
 
       <SessionInfoContainer>
