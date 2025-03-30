@@ -2,28 +2,16 @@ import { Gear } from "@phosphor-icons/react"
 import { IconButton } from "../../../components/IconButton"
 import {
   ModeInfo,
-  SessionCountdownContainer,
   SessionDetailsContainer,
   SessionHeader,
   SessionInfoContainer,
   SessionTitle,
 } from "./styles"
-import { CountdownCircleTimer } from "react-countdown-circle-timer"
 import { NavLink } from "react-router-dom"
 import { ModeBadge } from "../../../components/ModeBadge"
-import { Button } from "../../../components/Button"
-import { defaultTheme } from "../../../styles/themes/default"
-import { useEffect } from "react"
+import { Countdown } from "./Countdown"
 
 export function SessionDetails() {
-
-  //define a cor do timer de acordo com o modo
-  const timerColors = {
-    focusColor: defaultTheme["primary-500"].replace("#", ""),
-    shortBreakColor: defaultTheme["secondary-500"].replace("#", ""),
-    longBreakColor: defaultTheme["accent-500"].replace("#", ""),
-  }
-
   return (
     <SessionDetailsContainer>
       <SessionHeader>
@@ -54,31 +42,7 @@ export function SessionDetails() {
         </ModeInfo>
       </SessionInfoContainer>
 
-      <SessionCountdownContainer>
-        <div>
-          <h2>Vamos começar!</h2>
-          <p>Bora para mais um ciclo</p>
-          <Button label="Iniciar" />
-        </div>
-
-        <CountdownCircleTimer
-          isPlaying={false}
-          duration={500}
-          colors={`#${timerColors.focusColor}`}
-          trailColor={`#${defaultTheme["gray-800"].replace("#", "")}`}
-        >
-          {({ remainingTime }) => {
-            const minutes = Math.floor(remainingTime / 60)
-            const seconds = remainingTime % 60
-
-            return (
-              <span>
-                {minutes}:{seconds}
-              </span>
-            )
-          }}
-        </CountdownCircleTimer>
-      </SessionCountdownContainer>
+      <Countdown />
     </SessionDetailsContainer>
   )
 }
