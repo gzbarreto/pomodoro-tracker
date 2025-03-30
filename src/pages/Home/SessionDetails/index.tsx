@@ -8,11 +8,22 @@ import {
   SessionInfoContainer,
   SessionTitle,
 } from "./styles"
+import { CountdownCircleTimer } from "react-countdown-circle-timer"
 import { NavLink } from "react-router-dom"
 import { ModeBadge } from "../../../components/ModeBadge"
 import { Button } from "../../../components/Button"
+import { defaultTheme } from "../../../styles/themes/default"
+import { useEffect } from "react"
 
 export function SessionDetails() {
+
+  //define a cor do timer de acordo com o modo
+  const timerColors = {
+    focusColor: defaultTheme["primary-500"].replace("#", ""),
+    shortBreakColor: defaultTheme["secondary-500"].replace("#", ""),
+    longBreakColor: defaultTheme["accent-500"].replace("#", ""),
+  }
+
   return (
     <SessionDetailsContainer>
       <SessionHeader>
@@ -31,7 +42,7 @@ export function SessionDetails() {
             <h4>Modo atual</h4>
             <p>Ciclo atual do cronômetro</p>
           </div>
-          <ModeBadge mode={'longBreak'}/>
+          <ModeBadge mode={"longBreak"} />
         </ModeInfo>
 
         <ModeInfo>
@@ -39,7 +50,7 @@ export function SessionDetails() {
             <h4>Próximo modo</h4>
             <p>Ciclo que será ativado ao final do cronômetro</p>
           </div>
-          <ModeBadge mode={'focus'}/>
+          <ModeBadge mode={"focus"} />
         </ModeInfo>
       </SessionInfoContainer>
 
@@ -47,10 +58,26 @@ export function SessionDetails() {
         <div>
           <h2>Vamos começar!</h2>
           <p>Bora para mais um ciclo</p>
-          <Button label="Iniciar"/>
+          <Button label="Iniciar" />
         </div>
 
-        <span>00:00</span>
+        <CountdownCircleTimer
+          isPlaying={false}
+          duration={500}
+          colors={`#${timerColors.focusColor}`}
+          trailColor={`#${defaultTheme["gray-800"].replace("#", "")}`}
+        >
+          {({ remainingTime }) => {
+            const minutes = Math.floor(remainingTime / 60)
+            const seconds = remainingTime % 60
+
+            return (
+              <span>
+                {minutes}:{seconds}
+              </span>
+            )
+          }}
+        </CountdownCircleTimer>
       </SessionCountdownContainer>
     </SessionDetailsContainer>
   )
