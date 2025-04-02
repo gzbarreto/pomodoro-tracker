@@ -19,7 +19,7 @@ const getPageTitle = (path: string) => {
     case "/settings":
       return {
         title: "Configurações",
-        subtitle: "",
+        subtitle: "Personalize seu pomodoro",
       }
     default:
       return {

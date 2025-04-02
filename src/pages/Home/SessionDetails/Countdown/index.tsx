@@ -3,7 +3,18 @@ import { defaultTheme } from "../../../../styles/themes/default"
 import { CountdownContainer } from "./styles"
 import { Button } from "../../../../components/Button"
 
+// interface mode {
+//   type: "focus" | "shortBreak" | "longBreak"
+//   duration: number
+//   color: string
+// }
+
 export function Countdown() {
+
+
+  function handleStart() {
+
+  }
   //define a cor do timer de acordo com o modo
   const timerColors = {
     focusColor: defaultTheme["primary-500"].replace("#", ""),
@@ -16,11 +27,11 @@ export function Countdown() {
       <div>
         <h2>Vamos começar!</h2>
         <p>Bora para mais um ciclo</p>
-        <Button label="Iniciar" />
+        <Button onClick={handleStart} label="Iniciar" type="button" />
       </div>
       <CountdownCircleTimer
         isPlaying={false}
-        duration={500}
+        duration={30}
         colors={`#${timerColors.focusColor}`}
         trailColor={`#${defaultTheme["gray-800"].replace("#", "")}`}
       >

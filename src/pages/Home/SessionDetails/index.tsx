@@ -2,8 +2,12 @@ import { ModeInfo, SessionInfoContainer } from "./styles"
 import { ModeBadge } from "../../../components/ModeBadge"
 import { Countdown } from "./Countdown"
 import { SectionContainer, SessionHeader, SessionTitle } from "../styles"
+import { useContext } from "react"
+import { SessionContext } from "../../../contexts/SessionContext"
 
 export function SessionDetails() {
+const {sessionCurrentMode, session} = useContext(SessionContext)
+
   return (
     <SectionContainer>
       <SessionHeader>
@@ -19,7 +23,7 @@ export function SessionDetails() {
             <h4>Modo atual</h4>
             <p>Ciclo atual do cronômetro</p>
           </div>
-          <ModeBadge mode={"longBreak"} />
+          <ModeBadge mode={sessionCurrentMode.type} />
         </ModeInfo>
 
         <ModeInfo>
@@ -27,7 +31,7 @@ export function SessionDetails() {
             <h4>Próximo modo</h4>
             <p>Ciclo que será ativado ao final do cronômetro</p>
           </div>
-          <ModeBadge mode={"focus"} />
+          <ModeBadge mode={sessionNextMode.type} />
         </ModeInfo>
       </SessionInfoContainer>
 

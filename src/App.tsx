@@ -4,12 +4,15 @@ import { Router } from './Router.tsx'
 import { ThemeProvider } from "styled-components"
 import { defaultTheme } from "./styles/themes/default.ts"
 import { GlobalStyle } from "./styles/global.ts"
+import { SessionContextProvider } from "./contexts/SessionContext.tsx"
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <Router />
+        <SessionContextProvider>
+          <Router />
+        </SessionContextProvider>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
