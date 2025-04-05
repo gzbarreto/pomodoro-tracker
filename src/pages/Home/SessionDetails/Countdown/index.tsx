@@ -2,24 +2,27 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer"
 import { defaultTheme } from "../../../../styles/themes/default"
 import { CountdownContainer } from "./styles"
 import { Button } from "../../../../components/Button"
-
-// interface mode {
-//   type: "focus" | "shortBreak" | "longBreak"
-//   duration: number
-//   color: string
-// }
+import { useContext, useState } from "react"
+import { SessionContext } from "../../../../contexts/SessionContext"
 
 export function Countdown() {
+  const [key, setKey] = useState(0)
 
+  const {
+    startSession,
+    isSessionActive,
+    currentSession,
+    sessionCurrentMode,
+    completeCycle,
+  } = useContext(SessionContext)
 
   function handleStart() {
-
+    startSession()
   }
-  //define a cor do timer de acordo com o modo
-  const timerColors = {
-    focusColor: defaultTheme["primary-500"].replace("#", ""),
-    shortBreakColor: defaultTheme["secondary-500"].replace("#", ""),
-    longBreakColor: defaultTheme["accent-500"].replace("#", ""),
+
+  function handleCompletedCycle() {
+    completeCycle()
+    setKey((prevKey: number) => prevKey + 1)
   }
 
   return (
@@ -30,10 +33,12 @@ export function Countdown() {
         <Button onClick={handleStart} label="Iniciar" type="button" />
       </div>
       <CountdownCircleTimer
-        isPlaying={false}
-        duration={30}
-        colors={`#${timerColors.focusColor}`}
+        key={key}
+        isPlaying={isSessionActive}
+        duration={currentSession?.modeList[sessionCurrentMode].duration || 0}
+        colors={`#${currentSession?.modeList[sessionCurrentMode].color}`}
         trailColor={`#${defaultTheme["gray-800"].replace("#", "")}`}
+        onComplete={handleCompletedCycle}
       >
         {({ remainingTime }) => {
           const minutes = Math.floor(remainingTime / 60)
@@ -41,7 +46,10 @@ export function Countdown() {
 
           return (
             <span>
-              {minutes}:{seconds}
+              <span>
+                {String(minutes).padStart(2, "0")}:
+                {String(seconds).padStart(2, "0")}
+              </span>
             </span>
           )
         }}

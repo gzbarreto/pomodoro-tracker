@@ -1,11 +1,9 @@
 import { Brain, Coffee } from "@phosphor-icons/react"
 import { ModeBadgeFocus, ModeBadgeLongBreak, ModeBadgeShortBreak } from "./styles"
+import { Mode } from "../../contexts/SessionContext"
 
-interface ModeBadgeProps {
-  mode: "focus" | "shortBreak" | "longBreak"
-}
-export function ModeBadge({ mode }: ModeBadgeProps) {
-  switch (mode) {
+export function ModeBadge({ type }: Mode) {
+  switch (type) {
     case "focus":
       return (
         <ModeBadgeFocus>

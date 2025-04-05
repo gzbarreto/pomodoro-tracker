@@ -6,7 +6,8 @@ import { useContext } from "react"
 import { SessionContext } from "../../../contexts/SessionContext"
 
 export function SessionDetails() {
-const {sessionCurrentMode, session} = useContext(SessionContext)
+  const { sessionCurrentMode, currentSession } =
+    useContext(SessionContext)
 
   return (
     <SectionContainer>
@@ -23,7 +24,8 @@ const {sessionCurrentMode, session} = useContext(SessionContext)
             <h4>Modo atual</h4>
             <p>Ciclo atual do cronômetro</p>
           </div>
-          <ModeBadge mode={sessionCurrentMode.type} />
+
+          <ModeBadge type={currentSession.modeList[sessionCurrentMode].type} />
         </ModeInfo>
 
         <ModeInfo>
@@ -31,7 +33,10 @@ const {sessionCurrentMode, session} = useContext(SessionContext)
             <h4>Próximo modo</h4>
             <p>Ciclo que será ativado ao final do cronômetro</p>
           </div>
-          <ModeBadge mode={sessionNextMode.type} />
+
+          <ModeBadge
+            type={currentSession.modeList[sessionCurrentMode + 1].type}
+          />
         </ModeInfo>
       </SessionInfoContainer>
 
