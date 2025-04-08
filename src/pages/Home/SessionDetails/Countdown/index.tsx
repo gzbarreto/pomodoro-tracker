@@ -4,27 +4,28 @@ import { CountdownContainer } from "./styles"
 import { Button } from "../../../../components/Button"
 import { useContext, useState } from "react"
 import { SessionContext } from "../../../../contexts/SessionContext"
+import { ModeListContext } from "../../../../contexts/ModeListContext"
 
 export function Countdown() {
   const [key, setKey] = useState(0)
 
-  const {
-    startSession,
-    isSessionActive,
-    currentSession,
-    sessionCurrentMode,
-    completeCycle,
-  } = useContext(SessionContext)
+  const { startSession, isSessionActive } = useContext(SessionContext)
+
+  const { currentMode, updateCurrentMode, isLastMode } =
+    useContext(ModeListContext)
 
   function handleStart() {
     startSession()
   }
 
   function handleCompletedCycle() {
-    completeCycle()
+    updateCurrentMode()
     setKey((prevKey: number) => prevKey + 1)
   }
 
+  //TODO: fix the isLastMode logic
+  console.log("is last mode? ", isLastMode)
+  
   return (
     <CountdownContainer>
       <div>
@@ -35,8 +36,8 @@ export function Countdown() {
       <CountdownCircleTimer
         key={key}
         isPlaying={isSessionActive}
-        duration={currentSession?.modeList[sessionCurrentMode].duration || 0}
-        colors={`#${currentSession?.modeList[sessionCurrentMode].color}`}
+        duration={currentMode.duration || 0}
+        colors={`#${currentMode.color}`}
         trailColor={`#${defaultTheme["gray-800"].replace("#", "")}`}
         onComplete={handleCompletedCycle}
       >

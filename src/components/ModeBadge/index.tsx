@@ -1,6 +1,6 @@
 import { Brain, Coffee } from "@phosphor-icons/react"
 import { ModeBadgeFocus, ModeBadgeLongBreak, ModeBadgeShortBreak } from "./styles"
-import { Mode } from "../../contexts/SessionContext"
+import { Mode } from "../../contexts/ModeListContext"
 
 export function ModeBadge({ type }: Mode) {
   switch (type) {
