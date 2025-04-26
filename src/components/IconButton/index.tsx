@@ -2,13 +2,14 @@ import { JSX } from "react"
 import { IconButtonContainer } from "./styles"
 
 interface IconButtonProps {
-  icon: JSX.Element,
+  icon: JSX.Element
   label?: string
+  onClick?: () => void
 }
-export function IconButton({ icon, label }: IconButtonProps ) {
+export function IconButton({ icon, label, onClick }: IconButtonProps ) {
   return (
     <IconButtonContainer>
-      <button>{icon}{label}</button>
+      <button onClick={onClick}>{icon}{label}</button>
     </IconButtonContainer>
   )
 }

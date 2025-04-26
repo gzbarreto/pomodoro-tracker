@@ -20,7 +20,7 @@ interface SessionContextType {
   isSessionActive: boolean
   currentSession: Session | null
   startSession: () => void
-  // pauseSession: () => void
+  pauseSession: () => void
 }
 
 interface CyclesContextProviderProps {
@@ -51,6 +51,10 @@ export function SessionContextProvider({
     setIsSessionActive(true)
   }
 
+  function pauseSession(){
+    setIsSessionActive(false)
+  }
+
   return (
     <SessionContext.Provider
       value={{
@@ -58,6 +62,7 @@ export function SessionContextProvider({
         currentSessionId,
         currentSession,
         isSessionActive,
+        pauseSession,
         startSession,
       }}
     >

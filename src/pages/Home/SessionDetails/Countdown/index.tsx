@@ -5,11 +5,14 @@ import { Button } from "../../../../components/Button"
 import { useContext, useState } from "react"
 import { SessionContext } from "../../../../contexts/SessionContext"
 import { ModeListContext } from "../../../../contexts/ModeListContext"
+import { IconButton } from "../../../../components/IconButton"
+import { Pause } from "@phosphor-icons/react"
 
 export function Countdown() {
   const [key, setKey] = useState(0)
 
-  const { startSession, isSessionActive } = useContext(SessionContext)
+  const { startSession, isSessionActive, pauseSession } =
+    useContext(SessionContext)
 
   const { currentMode, updateCurrentMode, isLastMode } =
     useContext(ModeListContext)
@@ -23,16 +26,26 @@ export function Countdown() {
     setKey((prevKey: number) => prevKey + 1)
   }
 
+  function handleOnPause() {
+    pauseSession()
+  }
   //TODO: fix the isLastMode logic
   console.log("is last mode? ", isLastMode)
-  
+
   return (
     <CountdownContainer>
-      <div>
-        <h2>Vamos começar!</h2>
-        <p>Bora para mais um ciclo</p>
-        <Button onClick={handleStart} label="Iniciar" type="button" />
-      </div>
+      {!isSessionActive ? (
+        <div>
+          <h2>Vamos começar!</h2>
+          <p>Bora para mais um ciclo</p>
+          <Button onClick={handleStart} label="Iniciar" type="button" />
+        </div>
+      ) : (
+        <div>
+          <IconButton icon={<Pause />} onClick={handleOnPause} />
+        </div>
+      )}
+
       <CountdownCircleTimer
         key={key}
         isPlaying={isSessionActive}
