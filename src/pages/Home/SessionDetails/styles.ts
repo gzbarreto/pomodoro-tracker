@@ -27,3 +27,16 @@ export const ModeInfo = styled.div`
     font-weight: 600;
   }
 `
+
+export const MessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+
+  p {
+    text-align: center;
+    color: ${(props) => props.theme["gray-300"]};
+  }
+  `

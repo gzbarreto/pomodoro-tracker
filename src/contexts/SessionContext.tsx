@@ -23,6 +23,7 @@ interface SessionContextType {
   startSession: () => void
   pauseSession: () => void
   finishSession: () => void
+  setIsSessionFinished: (value: boolean) => void
 }
 
 interface CyclesContextProviderProps {
@@ -57,6 +58,7 @@ export function SessionContextProvider({
 
   function pauseSession(){
     setIsSessionActive(false)
+    //TODO: fix logic to show play button instead of begin cylcle when paused
   }
 
   function finishSession() {
@@ -80,6 +82,7 @@ export function SessionContextProvider({
         currentSession,
         isSessionActive,
         isSessionFinished,
+        setIsSessionFinished,
         pauseSession,
         startSession,
         finishSession,

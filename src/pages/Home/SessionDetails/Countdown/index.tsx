@@ -10,8 +10,12 @@ import { Pause } from "@phosphor-icons/react"
 export function Countdown() {
   const [key, setKey] = useState(0)
 
-  const { startSession, isSessionActive, isSessionFinished, pauseSession, finishSession } =
-    useContext(SessionContext)
+  const {
+    startSession,
+    isSessionActive,
+    pauseSession,
+    finishSession,
+  } = useContext(SessionContext)
 
   const { currentMode, updateCurrentMode, isLastMode } =
     useContext(ModeListContext)
@@ -31,25 +35,24 @@ export function Countdown() {
   function handleOnPause() {
     pauseSession()
   }
-  //TODO: show congrats message when the last cycle is completed
-  console.log("is last mode? ", isLastMode)
+
+  // TODO: refactor code to use useEffect (study this lesson https://app.rocketseat.com.br/classroom/projeto-02/group/funcionalidades-da-aplicacao/lesson/o-hook-use-effect)
+  // TODO: refactor code to use Reducers (study this lesson https://app.rocketseat.com.br/classroom/projeto-02/group/reducers/lesson/criando-reducer-de-ciclos)
+  // TODO: add task list logic do aplication:
+  // - use react hookForm (study this lesson https://app.rocketseat.com.br/classroom/projeto-02/group/formularios-1/lesson/controlled-vs-uncontrolled)
+  // - add task to list and to session
+  // - remove task from list
+  // - mark task as done/undone
+  // - clean list when startins new session
 
   return (
     <CountdownContainer>
       {!isSessionActive ? (
-        isSessionFinished ? (
-          <div>
-            <h2>Parabéns! 🥳</h2>
-            <p>Você chegou no fim de mais um ciclo.</p>
-            <Button onClick={handleStart} label="Iniciar novo ciclo" type="button" />
-          </div>
-        ) : (
-          <div>
-            <h2>Vamos começar!</h2>
-            <p>Bora para mais um ciclo</p>
-            <Button onClick={handleStart} label="Iniciar ciclo" type="button" />
-          </div>
-        )
+        <div>
+          <h2>Vamos começar!</h2>
+          <p>Bora para mais um ciclo</p>
+          <Button onClick={handleStart} label="Iniciar ciclo" type="button" />
+        </div>
       ) : (
         <div>
           <Button
