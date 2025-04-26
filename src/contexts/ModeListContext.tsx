@@ -48,7 +48,8 @@ export function ModeListContextProvider({
   ]
 
   //inicializa com o ultimo stado da lista (pois o ciclo finalizou)
-  const [currentModeIndex, setCurrentModeIndex] = useState(modeList.length - 1)
+  const [currentModeIndex, setCurrentModeIndex] = useState(0)
+
 
   const currentMode = modeList[currentModeIndex]
   const nextMode =
@@ -56,15 +57,14 @@ export function ModeListContextProvider({
       ? modeList[currentModeIndex + 1]
       : modeList[0]
 
-  // Check if the current mode is the last one
-  const isLastMode = currentModeIndex === modeList.length - 1
-
   function updateCurrentMode() {
-    //itera o modo ou volta ao inicio
+    // Update the current mode index, iterating or resetting to the start
     setCurrentModeIndex((prevIndex) =>
       prevIndex < modeList.length - 1 ? prevIndex + 1 : 0
     )
   }
+
+  const isLastMode = currentModeIndex === modeList.length - 1
 
   return (
     <ModeListContext.Provider

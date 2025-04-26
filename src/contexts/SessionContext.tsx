@@ -18,9 +18,11 @@ interface SessionContextType {
   sessions: Session[]
   currentSessionId: string
   isSessionActive: boolean
+  isSessionFinished: boolean
   currentSession: Session | null
   startSession: () => void
   pauseSession: () => void
+  finishSession: () => void
 }
 
 interface CyclesContextProviderProps {
@@ -36,6 +38,7 @@ export function SessionContextProvider({
   const [sessions, setSessions] = useState<Session[]>([])
   const [currentSessionId, setcurrentSessionId] = useState("")
   const [isSessionActive, setIsSessionActive] = useState(false)
+  const [isSessionFinished, setIsSessionFinished] = useState(false)
 
   const currentSession =
     sessions.find((session) => session.id === currentSessionId) || null
@@ -49,10 +52,24 @@ export function SessionContextProvider({
     setSessions((state) => [...state, newSession])
     setcurrentSessionId(newSession.id)
     setIsSessionActive(true)
+    setIsSessionFinished(false)
   }
 
   function pauseSession(){
     setIsSessionActive(false)
+  }
+
+  function finishSession() {
+    setSessions((state) =>
+      state.map((session) => {
+        if (session.id === currentSessionId) {
+          return { ...session, finishedDate: new Date() }
+        }
+        return session
+      }),
+    )
+    setIsSessionActive(false)
+    setIsSessionFinished(true)
   }
 
   return (
@@ -62,8 +79,10 @@ export function SessionContextProvider({
         currentSessionId,
         currentSession,
         isSessionActive,
+        isSessionFinished,
         pauseSession,
         startSession,
+        finishSession,
       }}
     >
       {children}
