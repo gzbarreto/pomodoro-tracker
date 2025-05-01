@@ -15,6 +15,17 @@ export const ListContainer = styled.div`
   }
 `
 
+export const EmptyListState = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 5rem;
+  text-align: center;
+  color: ${(props) => props.theme["gray-600"]};
+`
+
 export const FormContainer = styled.form`
   display: grid;
   grid-template-columns: 1fr auto;

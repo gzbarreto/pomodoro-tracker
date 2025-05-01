@@ -1,8 +1,14 @@
 import { Actions } from "./actions"
 
+interface Task {
+  id: string
+  task: string
+  isDone: boolean
+}
+
 export interface Session {
   id: string
-  // task: Task[]
+  tasks: Task[]
   startDate?: Date
   interruptedDate?: Date
   finishedDate?: Date

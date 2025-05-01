@@ -8,12 +8,6 @@ import {
   startSessionAction,
 } from "../reducers/session/actions"
 
-// interface Task {
-//   id: string
-//   task: string
-//   state: boolean
-// }
-
 interface SessionContextType {
   sessions: Session[]
   currentSessionId: string
@@ -59,7 +53,7 @@ export function SessionContextProvider({
   function startSession() {
     const newSession: Session = {
       id: String(new Date().getTime()),
-      // task: [],
+      tasks: [],
       startDate: new Date(),
     }
     dispatch(startSessionAction(newSession))
