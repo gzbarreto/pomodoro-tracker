@@ -12,7 +12,7 @@ import { SessionContext } from "../../../contexts/SessionContext"
 import { Clipboard } from "@phosphor-icons/react"
 
 export function TodoList() {
-  const { currentSession } = useContext(SessionContext)
+  const { currentSession, sessions } = useContext(SessionContext)
 
   return (
     <SectionContainer>
