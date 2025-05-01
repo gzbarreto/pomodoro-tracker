@@ -7,6 +7,7 @@ interface listItemProps {
   onClick: () => void
 }
 
+
 export function ListItem({ isDone, task, onClick }: listItemProps) {
   return (
     <ListItemContainer>

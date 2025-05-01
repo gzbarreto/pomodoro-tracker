@@ -81,6 +81,25 @@ export function sessionsReducer(state: SessionState, action: any) {
         }),
       }
 
+    case Actions.CLICK_TASK:
+      return {
+        ...state,
+        sessions: state.sessions.map((session) => {
+          if (session.id === action.payload.currentSessionId) {
+            return {
+              ...session,
+              tasks: session.tasks.map((task) => {
+                if (task.id === action.payload.taskId) {
+                  return { ...task, isDone: !task.isDone }
+                }
+                return task
+              }),
+            }
+          }
+          return session
+        }),
+      }
+
     default:
       return state
   }

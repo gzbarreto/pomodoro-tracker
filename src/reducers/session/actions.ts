@@ -7,6 +7,7 @@ export enum Actions {
   FINISH_SESSION = "FINISH_SESSION",
   RESTART_SESSION = "RESTART_SESSION",
   ADD_TASK = "ADD_TASK",
+  CLICK_TASK = "CLICK_TASK",
 }
 
 export function startSessionAction(newSession: Session) {
@@ -46,6 +47,16 @@ export function addTaskAction(newTask: Task, currentSessionId: string) {
     type: Actions.ADD_TASK,
     payload: {
       newTask,
+      currentSessionId: currentSessionId,
+    },
+  }
+}
+
+export function clickTaskAction(taskId: string, currentSessionId: string) {
+  return {
+    type: Actions.CLICK_TASK,
+    payload: {
+      taskId,
       currentSessionId: currentSessionId,
     },
   }
