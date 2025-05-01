@@ -42,7 +42,6 @@ export function Countdown() {
     resumeSession()
   }
 
-  // TODO: refactor code to use Reducers (study this lesson https://app.rocketseat.com.br/classroom/projeto-02/group/reducers/lesson/criando-reducer-de-ciclos)
   // TODO: add task list logic do aplication:
   // - use react hookForm (study this lesson https://app.rocketseat.com.br/classroom/projeto-02/group/formularios-1/lesson/controlled-vs-uncontrolled)
   // - add task to list and to session

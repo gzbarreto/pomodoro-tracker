@@ -1,18 +1,18 @@
 import { createContext, ReactNode, useReducer } from "react"
+import { Session, sessionsReducer } from "../reducers/session/reducer"
+import {
+  finishSessionAction,
+  pauseSessionAction,
+  restartSessionAction,
+  resumeSessionAction,
+  startSessionAction,
+} from "../reducers/session/actions"
 
 // interface Task {
 //   id: string
 //   task: string
 //   state: boolean
 // }
-
-interface Session {
-  id: string
-  // task: Task[]
-  startDate?: Date
-  interruptedDate?: Date
-  finishedDate?: Date
-}
 
 interface SessionContextType {
   sessions: Session[]
@@ -32,74 +32,18 @@ interface CyclesContextProviderProps {
   children: ReactNode
 }
 
-interface SessionState {
-  sessions: Session[]
-  currentSessionId: string
-  isSessionActive: boolean
-  isSessionFinished: boolean
-  isSessionPaused: boolean
-}
-
 export const SessionContext = createContext({} as SessionContextType)
 
 export function SessionContextProvider({
   children,
 }: CyclesContextProviderProps) {
-  const [sessionsState, dispatch] = useReducer(
-    (state: SessionState, action: any) => {
-      switch (action.type) {
-        case "START_SESSION":
-          return {
-            ...state,
-            sessions: [...state.sessions, action.payload],
-            currentSessionId: action.payload.id,
-            isSessionActive: true,
-            isSessionFinished: false,
-          }
-
-        case "PAUSE_SESSION":
-          return {
-            ...state,
-            isSessionPaused: true,
-          }
-
-        case "RESUME_SESSION":
-          return {
-            ...state,
-            isSessionPaused: false,
-          }
-
-        case "FINISH_SESSION":
-          return {
-            ...state,
-            sessions: state.sessions.map((session) => {
-              if (session.id === action.payload) {
-                return { ...session, finishedDate: new Date() }
-              }
-              return session
-            }),
-            isSessionActive: false,
-            isSessionFinished: true,
-          }
-
-        case "RESTART_SESSION":
-          return {
-            ...state,
-            isSessionFinished: false,
-          }
-
-        default:
-          return state
-      }
-    },
-    {
-      sessions: [],
-      currentSessionId: "",
-      isSessionActive: false,
-      isSessionFinished: false,
-      isSessionPaused: false,
-    }
-  )
+  const [sessionsState, dispatch] = useReducer(sessionsReducer, {
+    sessions: [],
+    currentSessionId: "",
+    isSessionActive: false,
+    isSessionFinished: false,
+    isSessionPaused: false,
+  })
 
   const {
     sessions,
@@ -118,36 +62,24 @@ export function SessionContextProvider({
       // task: [],
       startDate: new Date(),
     }
-    dispatch({
-      type: "START_SESSION",
-      payload: newSession,
-    })
+    dispatch(startSessionAction(newSession))
   }
 
   function pauseSession() {
-    dispatch({
-      type: "PAUSE_SESSION",
-    })
+    dispatch(pauseSessionAction())
   }
 
   function resumeSession() {
-    dispatch({
-      type: "RESUME_SESSION",
-    })
+    dispatch(resumeSessionAction())
   }
 
   function finishSession() {
-    dispatch({
-      type: "FINISH_SESSION",
-      payload: currentSessionId,
-    })
+    dispatch(finishSessionAction(currentSessionId))
   }
 
-   function restartSession() {
-     dispatch({
-       type: "RESTART_SESSION",
-     })
-   }
+  function restartSession() {
+    dispatch(restartSessionAction())
+  }
 
   return (
     <SessionContext.Provider
