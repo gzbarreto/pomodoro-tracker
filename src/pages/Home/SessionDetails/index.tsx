@@ -9,11 +9,11 @@ import { Button } from "../../../components/Button"
 
 export function SessionDetails() {
   const { currentMode, nextMode } = useContext(ModeListContext)
-  const { isSessionFinished, setIsSessionFinished } = useContext(SessionContext)
+  const { isSessionFinished, restartSession } = useContext(SessionContext)
 
-    function handleRestart() {
-    // clean tasks
-    setIsSessionFinished(false)
+  function handleRestart() {
+    //TODO: clean tasks
+    restartSession()
   }
 
   return (

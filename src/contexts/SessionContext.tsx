@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react"
+import { createContext, ReactNode, useReducer } from "react"
 
 // interface Task {
 //   id: string
@@ -19,15 +19,25 @@ interface SessionContextType {
   currentSessionId: string
   isSessionActive: boolean
   isSessionFinished: boolean
+  isSessionPaused: boolean
   currentSession: Session | null
   startSession: () => void
   pauseSession: () => void
+  resumeSession: () => void
   finishSession: () => void
-  setIsSessionFinished: (value: boolean) => void
+  restartSession: () => void
 }
 
 interface CyclesContextProviderProps {
   children: ReactNode
+}
+
+interface SessionState {
+  sessions: Session[]
+  currentSessionId: string
+  isSessionActive: boolean
+  isSessionFinished: boolean
+  isSessionPaused: boolean
 }
 
 export const SessionContext = createContext({} as SessionContextType)
@@ -35,11 +45,69 @@ export const SessionContext = createContext({} as SessionContextType)
 export function SessionContextProvider({
   children,
 }: CyclesContextProviderProps) {
+  const [sessionsState, dispatch] = useReducer(
+    (state: SessionState, action: any) => {
+      switch (action.type) {
+        case "START_SESSION":
+          return {
+            ...state,
+            sessions: [...state.sessions, action.payload],
+            currentSessionId: action.payload.id,
+            isSessionActive: true,
+            isSessionFinished: false,
+          }
 
-  const [sessions, setSessions] = useState<Session[]>([])
-  const [currentSessionId, setcurrentSessionId] = useState("")
-  const [isSessionActive, setIsSessionActive] = useState(false)
-  const [isSessionFinished, setIsSessionFinished] = useState(false)
+        case "PAUSE_SESSION":
+          return {
+            ...state,
+            isSessionPaused: true,
+          }
+
+        case "RESUME_SESSION":
+          return {
+            ...state,
+            isSessionPaused: false,
+          }
+
+        case "FINISH_SESSION":
+          return {
+            ...state,
+            sessions: state.sessions.map((session) => {
+              if (session.id === action.payload) {
+                return { ...session, finishedDate: new Date() }
+              }
+              return session
+            }),
+            isSessionActive: false,
+            isSessionFinished: true,
+          }
+
+        case "RESTART_SESSION":
+          return {
+            ...state,
+            isSessionFinished: false,
+          }
+
+        default:
+          return state
+      }
+    },
+    {
+      sessions: [],
+      currentSessionId: "",
+      isSessionActive: false,
+      isSessionFinished: false,
+      isSessionPaused: false,
+    }
+  )
+
+  const {
+    sessions,
+    currentSessionId,
+    isSessionActive,
+    isSessionFinished,
+    isSessionPaused,
+  } = sessionsState
 
   const currentSession =
     sessions.find((session) => session.id === currentSessionId) || null
@@ -50,29 +118,36 @@ export function SessionContextProvider({
       // task: [],
       startDate: new Date(),
     }
-    setSessions((state) => [...state, newSession])
-    setcurrentSessionId(newSession.id)
-    setIsSessionActive(true)
-    setIsSessionFinished(false)
+    dispatch({
+      type: "START_SESSION",
+      payload: newSession,
+    })
   }
 
-  function pauseSession(){
-    setIsSessionActive(false)
-    //TODO: fix logic to show play button instead of begin cylcle when paused
+  function pauseSession() {
+    dispatch({
+      type: "PAUSE_SESSION",
+    })
+  }
+
+  function resumeSession() {
+    dispatch({
+      type: "RESUME_SESSION",
+    })
   }
 
   function finishSession() {
-    setSessions((state) =>
-      state.map((session) => {
-        if (session.id === currentSessionId) {
-          return { ...session, finishedDate: new Date() }
-        }
-        return session
-      }),
-    )
-    setIsSessionActive(false)
-    setIsSessionFinished(true)
+    dispatch({
+      type: "FINISH_SESSION",
+      payload: currentSessionId,
+    })
   }
+
+   function restartSession() {
+     dispatch({
+       type: "RESTART_SESSION",
+     })
+   }
 
   return (
     <SessionContext.Provider
@@ -82,10 +157,12 @@ export function SessionContextProvider({
         currentSession,
         isSessionActive,
         isSessionFinished,
-        setIsSessionFinished,
+        isSessionPaused,
         pauseSession,
+        resumeSession,
         startSession,
         finishSession,
+        restartSession,
       }}
     >
       {children}

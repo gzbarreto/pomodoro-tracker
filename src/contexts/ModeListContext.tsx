@@ -47,7 +47,7 @@ export function ModeListContextProvider({
     },
   ]
 
-  //inicializa com o ultimo stado da lista (pois o ciclo finalizou)
+  //inicializa com o ultimo estado da lista (pois o ciclo finalizou)
   const [currentModeIndex, setCurrentModeIndex] = useState(0)
 
 
