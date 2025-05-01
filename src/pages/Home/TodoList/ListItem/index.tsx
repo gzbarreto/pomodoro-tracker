@@ -10,7 +10,7 @@ interface listItemProps {
 
 export function ListItem({ isDone, task, onClick }: listItemProps) {
   return (
-    <ListItemContainer>
+    <ListItemContainer isDone={isDone}>
       <Checkbox isChecked={isDone} onClick={onClick} />
       <p>{task}</p>
     </ListItemContainer>

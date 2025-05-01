@@ -1,9 +1,21 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-export const ListItemContainer = styled.li`
-list-style: none;
+interface ListItemProps {
+  isDone: boolean
+}
 
-display: flex;
-align-items: center;
-gap: 1rem;
+export const ListItemContainer = styled.li<ListItemProps>`
+  list-style: none;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  p {
+    text-decoration: ${(props) => (props.isDone ? "line-through" : "none")};
+    color: ${(props) =>
+      props.isDone
+        ? props.theme["gray-500"]
+        : props.theme["gray-200"]}; // Example: gray for done tasks
+  }
 `
