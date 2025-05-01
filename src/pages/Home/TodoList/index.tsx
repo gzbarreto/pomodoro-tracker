@@ -10,9 +10,23 @@ import {
 } from "./styles"
 import { SessionContext } from "../../../contexts/SessionContext"
 import { Clipboard } from "@phosphor-icons/react"
+import { useForm } from "react-hook-form"
 
 export function TodoList() {
-  const { currentSession, sessions } = useContext(SessionContext)
+  const { currentSession, addTask, currentSessionId } = useContext(SessionContext)
+  const { register, handleSubmit } = useForm()
+
+  function handleAddTask(data: any) {
+    const newTask = {
+      id: String(new Date().getTime()),
+      task: data.content,
+      isDone: false,
+    }
+
+    addTask(newTask, currentSessionId)
+    // Reset the input field after adding the task
+    document.querySelector("input")!.value = ""
+  }
 
   return (
     <SectionContainer>
@@ -43,8 +57,12 @@ export function TodoList() {
         )}
 
         <FormContainer>
-          <TaskInput placeholder="Nova tarefa" />
-          <Button label="Adicionar" type="submit" />
+          <TaskInput placeholder="Nova tarefa" {...register("content")} />
+          <Button
+            label="Adicionar"
+            type="submit"
+            onClick={handleSubmit(handleAddTask)}
+          />
         </FormContainer>
       </ListContainer>
     </SectionContainer>

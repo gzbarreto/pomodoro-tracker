@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useReducer } from "react"
-import { Session, sessionsReducer } from "../reducers/session/reducer"
+import { Session, sessionsReducer, Task } from "../reducers/session/reducer"
 import {
+  addTaskAction,
   finishSessionAction,
   pauseSessionAction,
   restartSessionAction,
@@ -20,6 +21,7 @@ interface SessionContextType {
   resumeSession: () => void
   finishSession: () => void
   restartSession: () => void
+  addTask: (newTask: Task, currentSessionId: string) => void
 }
 
 interface CyclesContextProviderProps {
@@ -75,6 +77,10 @@ export function SessionContextProvider({
     dispatch(restartSessionAction())
   }
 
+  function addTask(newTask: Task, currentSessionId: string) {
+    dispatch(addTaskAction(newTask, currentSessionId))
+  }
+
   return (
     <SessionContext.Provider
       value={{
@@ -89,6 +95,7 @@ export function SessionContextProvider({
         startSession,
         finishSession,
         restartSession,
+        addTask,
       }}
     >
       {children}

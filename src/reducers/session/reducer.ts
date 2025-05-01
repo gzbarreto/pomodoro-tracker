@@ -1,6 +1,6 @@
 import { Actions } from "./actions"
 
-interface Task {
+export interface Task {
   id: string
   task: string
   isDone: boolean
@@ -65,6 +65,20 @@ export function sessionsReducer(state: SessionState, action: any) {
       return {
         ...state,
         isSessionFinished: false,
+      }
+
+    case Actions.ADD_TASK:
+      return {
+        ...state,
+        sessions: state.sessions.map((session) => {
+          if (session.id === state.currentSessionId) {
+            return {
+              ...session,
+              tasks: [...session.tasks, action.payload.newTask],
+            }
+          }
+          return session
+        }),
       }
 
     default:
