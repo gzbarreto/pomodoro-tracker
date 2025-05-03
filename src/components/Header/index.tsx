@@ -51,7 +51,7 @@ export function Header() {
         )}
         {location.pathname === "/history" && (
           <NavLink to="/" title="Home">
-            <IconButton icon={<Timer size={24} />} label={"Home"} />
+            <IconButton icon={<Timer size={24} />} label={"Timer"} />
           </NavLink>
         )}
         {location.pathname === "/settings" && (

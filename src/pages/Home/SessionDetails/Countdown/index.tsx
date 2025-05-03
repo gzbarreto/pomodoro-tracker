@@ -43,7 +43,6 @@ export function Countdown() {
   }
 
   // TODO: add task list logic do aplication:
-  // - remove task from list
   // - create initial session so it can add tasks before starting the session
 
   return (

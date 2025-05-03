@@ -3,6 +3,7 @@ import { Router } from './Router.tsx'
 
 import { ThemeProvider } from "styled-components"
 import { defaultTheme } from "./styles/themes/default.ts"
+//import { lightTheme } from "./styles/themes/light.ts"
 import { GlobalStyle } from "./styles/global.ts"
 import { SessionContextProvider } from "./contexts/SessionContext.tsx"
 
