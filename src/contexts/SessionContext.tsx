@@ -3,6 +3,7 @@ import { Session, sessionsReducer, Task } from "../reducers/session/reducer"
 import {
   addTaskAction,
   clickTaskAction,
+  deleteTaskAction,
   finishSessionAction,
   pauseSessionAction,
   restartSessionAction,
@@ -24,6 +25,7 @@ interface SessionContextType {
   restartSession: () => void
   addTask: (newTask: Task, currentSessionId: string) => void
   clickTask: (taskId: string, currentSessionId: string) => void
+  deleteTask: (taskId: string, currentSessionId: string) => void
 }
 
 interface CyclesContextProviderProps {
@@ -53,8 +55,6 @@ export function SessionContextProvider({
 
   const currentSession =
     sessions.find((session) => session.id === currentSessionId) || null
-
-  //TODO: create an initial session so it can add tasks before starting the session
 
   function startSession() {
     const newSession: Session = {
@@ -89,6 +89,10 @@ export function SessionContextProvider({
     dispatch(clickTaskAction(taskId, currentSessionId))
   }
 
+  function deleteTask(taskId: string, currentSessionId: string) {
+    dispatch(deleteTaskAction(taskId, currentSessionId))
+  }
+
   return (
     <SessionContext.Provider
       value={{
@@ -105,6 +109,7 @@ export function SessionContextProvider({
         restartSession,
         addTask,
         clickTask,
+        deleteTask,
       }}
     >
       {children}

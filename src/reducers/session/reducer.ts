@@ -100,6 +100,21 @@ export function sessionsReducer(state: SessionState, action: any) {
         }),
       }
 
+      case Actions.DELETE_TASK:
+        return {
+          ...state,
+          sessions: state.sessions.map((session) => {
+            if (session.id === action.payload.currentSessionId) {
+              return {
+                ...session,
+                tasks: session.tasks.filter(
+                  (task) => task.id !== action.payload.taskId,
+                ),
+              }
+            }
+            return session
+          }),
+        }
     default:
       return state
   }

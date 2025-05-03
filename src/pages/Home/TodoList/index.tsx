@@ -13,7 +13,8 @@ import { Clipboard } from "@phosphor-icons/react"
 import { useForm } from "react-hook-form"
 
 export function TodoList() {
-  const { currentSession, addTask, currentSessionId, clickTask } = useContext(SessionContext)
+  const { currentSession, addTask, currentSessionId, clickTask, deleteTask } =
+    useContext(SessionContext)
   const { register, handleSubmit } = useForm()
 
   function handleAddTask(data: any) {
@@ -22,7 +23,6 @@ export function TodoList() {
       task: data.content,
       isDone: false,
     }
-
     addTask(newTask, currentSessionId)
     // Reset the input field after adding the task
     document.querySelector("input")!.value = ""
@@ -30,6 +30,10 @@ export function TodoList() {
 
   function handleTaskDone(taskId: string) {
     clickTask(taskId, currentSessionId)
+  }
+
+  function handleTaskDelete(taskId: string) {
+    deleteTask(taskId, currentSessionId)
   }
 
   return (
@@ -55,6 +59,7 @@ export function TodoList() {
                 isDone={task.isDone}
                 task={task.task}
                 onClick={() => handleTaskDone(task.id)}
+                onDelete={() => handleTaskDelete(task.id)}
               />
             ))}
           </ul>

@@ -43,11 +43,8 @@ export function Countdown() {
   }
 
   // TODO: add task list logic do aplication:
-  // - use react hookForm (study this lesson https://app.rocketseat.com.br/classroom/projeto-02/group/formularios-1/lesson/controlled-vs-uncontrolled)
-  // - add task to list and to session
   // - remove task from list
-  // - mark task as done/undone
-  // - clean list when startins new session
+  // - create initial session so it can add tasks before starting the session
 
   return (
     <CountdownContainer>

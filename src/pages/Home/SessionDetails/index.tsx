@@ -12,7 +12,6 @@ export function SessionDetails() {
   const { isSessionFinished, restartSession } = useContext(SessionContext)
 
   function handleRestart() {
-    //TODO: clean tasks
     restartSession()
   }
 
